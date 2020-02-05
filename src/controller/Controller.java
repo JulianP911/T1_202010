@@ -27,6 +27,9 @@ public class Controller
 		modelo = new Modelo();
 	}
 
+	/**
+	 * Metodo run
+	 */
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
@@ -36,20 +39,22 @@ public class Controller
 		while( !fin )
 		{
 			view.printMenu();
-			String opcion = lector.next();
+     		String opcion = lector.next();
 			
 			switch(opcion)
 			{
-			   case "Opcion 1":
+			   case "Opcion1":
 				   int tamanio = modelo.darTamano();
-				   view.printMessage(modelo.darDatos(0));           // Imprime la informacion basica del primer comparendo
-				   view.printMessage(modelo.darDatos(tamanio-1));   // Imprime la informacion basica del ultimo comparendo
-				   view.printMessage(tamanio + " ");                // Imprime el tamanio de la lista enlazad
-		        
-			   case "Opcion 2": 
+				   view.printMessage(modelo.darDatos(0) + " \n");                          // Imprime la informacion basica del primer comparendo
+				   view.printMessage(modelo.darDatos(tamanio-1) + " \n");                  // Imprime la informacion basica del ultimo comparendo
+				   view.printMessage("El tamanio de la listas es: " + tamanio + " \n");    // Imprime el tamanio de la lista enlazad
+		           break;
+				   
+			   case "Opcion2": 
 				   view.printMessage("Ingrese el Objectid para ver la informacion");
 				   int entrada = lector.nextInt();
-				   view.printMessage(modelo.darDatosPorObjectid(entrada));
+				   view.printMessage(modelo.darDatosPorObjectid(entrada));                  // Imprime la informacion teneindo en cuenta el objectid
+				   break;
 				   
 			   case "Cerrar":
 				   view.printMessage("--------- \n Hasta pronto !! \n---------"); 

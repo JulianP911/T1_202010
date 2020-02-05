@@ -5,7 +5,7 @@ package model.data_structures;
  * @author julianpadilla
  * @param <E> Tipo Generico
  */
-public interface IListaEnlazada <E> 
+public interface IListaEnlazada <E> extends Iterable<E>
 {
 	/**
 	 * Retornar el numero de elementos presentes en el arreglo

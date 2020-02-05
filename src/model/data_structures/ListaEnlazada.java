@@ -1,5 +1,7 @@
 package model.data_structures;
 
+import java.util.Iterator;
+
 /**
  * Clase de la lista enlazada sencilla que implementa la interfaz IListaEnlazada
  * @author Julian Padilla
@@ -8,19 +10,19 @@ package model.data_structures;
 public class ListaEnlazada <E> implements IListaEnlazada <E>
 {
 	// Atributos
-	
+
 	/**
 	 * Nodo que hacer referncia al primero
 	 */
 	private Nodo<E> primero;
-	
+
 	/**
 	 * Tamanio de la lista
 	 */
 	private int tamanio;
 
 	// Metodo Constructor
-	
+
 	/**
 	 * El nodo primero se inicializa en null
 	 * El tamanio comienza desde 0
@@ -30,9 +32,18 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 		primero = null;
 		tamanio = 0;
 	}
-	
+
 	// Metodos
 	
+	/**
+	 * Retorna el nodo cabezera de la lista
+	 * @return Nodo cabeza lista
+	 */
+	public Nodo<E> obtenerPrimero()
+	{
+		return primero;
+	}
+
 	/**
 	 * Agregar un objeto a la lista encadenada al principio
 	 * @param pObjeto Objeto a agregar al principio
@@ -44,7 +55,7 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 		primero = nuevoNodo;
 		tamanio++;
 	}
-	
+
 	/**
 	 * Agregar un objeto a la lista encadenada al final de esta
 	 * @param pObjeto Objeto a agregar al final
@@ -52,7 +63,7 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 	public void agregarNodoFinal(E pObjeto)
 	{
 		Nodo<E> nuevoNodo = new Nodo<E>(pObjeto);
-		
+
 		if(primero == null)
 		{
 			primero = nuevoNodo;
@@ -60,17 +71,17 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 		else
 		{
 			Nodo<E> actual = primero;
-			
+
 			while(actual.obtenerNodoSiguiente() != null)
 			{
 				actual = actual.obtenerNodoSiguiente();
 			}
-			
+
 			actual.establecerNodoSiguiente(nuevoNodo);
 		}
 		tamanio++;
 	}
-	
+
 	/**
 	 * Eliminar un objeto de la lista encadenada al principio
 	 * @param pObjeto Objeto a eliminar al pricipio
@@ -80,7 +91,7 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 		primero = primero.obtenerNodoSiguiente();
 		tamanio--;
 	}
-	
+
 	/**
 	 * Eliminar un objeto de la lista encadenada donde se encuntre el objeto que ingresa por parametro
 	 * @param pObjeto Objeto a eliminar
@@ -88,73 +99,56 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 	public void eleminarNodo(E pObjeto)
 	{
 		Nodo<E> temporal = primero;
-		
+
 		while(temporal != null && !temporal.darObjeto().equals(pObjeto))
 		{
 			temporal = temporal.obtenerNodoSiguiente();
 		}
-		
+
 		if(temporal != null && temporal.darObjeto().equals(pObjeto))
 		{
 			temporal.establecerNodoSiguiente(temporal.obtenerNodoSiguiente().obtenerNodoSiguiente());
 		}
-		
+
 		temporal = temporal.obtenerNodoSiguiente();
 		tamanio--;
 	}
-	
+
 	/**
 	 * Dar el tamanio de lista enlazada sencilla
 	 */
 	public int darTamnaioLista()
 	{
-		int contador = 0;
-		
-		Nodo<E> temporal = primero;
-		
-		if(primero != null)
-		{
-			while(primero.obtenerNodoSiguiente() != null)
-			{
-				temporal = temporal.obtenerNodoSiguiente();
-				contador++;
-			}
-		}
-		else
-		{
-			contador = 0;
-		}
-		
-		return contador;
+		return tamanio;
 	}
-	
+
 	/**
 	 * Devuele el objeto en la posicion que ingreso por parametro
 	 * @param Posicion en la lista
 	 */
-	public Object verObjeto(int pPosicion)
+	public E verObjeto(int pPosicion)
 	{
 		Nodo<E> temporal = primero;
-		
+
 		for(int i = 0; i < pPosicion; i++)
 		{
 			temporal = temporal.obtenerNodoSiguiente();
 		}
-		
+
 		return temporal.darObjeto();
 	}
-	
+
 	/**
 	 * Devuele el objeto en el nodo que ingresa por parametro
 	 * @param pNodo Nodo actual
 	 */
-	public Object verObjetoActual(Nodo<E> pNodo)
+	public E verObjetoActual(Nodo<E> pNodo)
 	{
-		Object respuesta =null;
+		E respuesta =null;
 		respuesta = pNodo.darObjeto();
 		return respuesta;
 	}
-	
+
 	/**
 	 * Permite cambiar la referencia al nodo siguiente
 	 * @param pNodo Nodo actual
@@ -165,22 +159,31 @@ public class ListaEnlazada <E> implements IListaEnlazada <E>
 		{
 			pNodo = null;
 		}
-		
+
 		pNodo.obtenerNodoSiguiente();
 	}
-	
+
 	/**
 	 * Metodo to String
 	 */
 	public String toString()
 	{
 		String respuesta = " ";
-		
+
 		for(Nodo<E> temp = primero; temp != null; temp = temp.obtenerNodoSiguiente())
 		{
 			respuesta += temp.darObjeto().toString() + "\n";
 		}
-		
+
 		return respuesta;
+	}
+
+	/**
+	 * Crea el iterador para recorrer la lista
+	 */
+	@Override
+	public Iterator<E> iterator() 
+	{
+		return new ListIterator<E>(this);
 	}
 }

@@ -15,8 +15,9 @@ public class View
 		public void printMenu()
 		{
 			System.out.println("Ingrese la opcion que le interesa saber:");
-			System.out.println("Opcion 1: Mostrar la información básica del primer comparendo y del último comparendo en la lista y el total de comparendos en la lista.");
-			System.out.println("Opcion 2: Consultar la información básica de un comparendo dado su OBJECTID.");
+			System.out.println("Opcion1: Mostrar la información básica del primer comparendo y del último comparendo en la lista y el total de comparendos en la lista.");
+			System.out.println("Opcion2: Consultar la información básica de un comparendo dado su OBJECTID.");
+			System.out.println("Si quiere finaliza ingrese la cadena: Cerrar");
 		}
 
 		public void printMessage(String mensaje) 
