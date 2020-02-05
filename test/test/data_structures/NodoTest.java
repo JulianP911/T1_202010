@@ -20,7 +20,7 @@ public class NodoTest <E>
 	@Before
 	public void setupEscenario1( )
 	{
-		nodo = new Nodo<Integer>(null);
+		nodo = new Nodo<Integer>(0);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class NodoTest <E>
 	public void testNodo() 
 	{
 		setupEscenario1();
-		assertEquals("El nodo siguiente deberia ser null", nodo == null);
+		assertTrue("El nodo siguiente no deberia ser null", nodo == null);
 		
 		setupEscenario2();
 		assertEquals("El objeto no es correcto con lo esperado", 9, nodo.darObjeto().intValue());

@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import model.data_structures.*;
 
-public class ListaEnlazadaTest <E>
+public class ListaEnlazadaTest 
 {	
 	/**
 	 * Lista enlazada sencilla de tipo integer
@@ -58,7 +58,7 @@ public class ListaEnlazadaTest <E>
 		setupEscenario1();
 		setupEscenario2();
 		
-		assertNull("La lista deberia no ser null", listaEnlazada != null && listaEnlazada1 != null);
+		assertNotNull("La lista deberia no ser null", listaEnlazada != null && listaEnlazada1 != null);
 	}
 
 	/**

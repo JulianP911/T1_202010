@@ -1,4 +1,5 @@
 package model.logic;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,25 +19,38 @@ public class Modelo
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IListaEnlazada<Object> datos;
+	private IListaEnlazada<Comparendo> datos;
 
 	/**
 	 * Constructor del modelo del mundo
 	 */
 	public Modelo()
-	{
+	{	
 		Gson gson = new Gson();
 		BufferedReader br = null;
-
+		
 		try
 		{
 			br = new BufferedReader(new FileReader("./data/comparendos_dei_2018_small.geojson"));
 			Example result = gson.fromJson(br, Example.class);
-
+	
 			for(int  i = 0; i < result.getFeatures().size(); i ++)
 			{
-				datos.agregarNodoFinal(result.getFeatures().get(i));
+				int objective = result.getFeatures().get(i).getProperties().getOBJECTID();
+				String fecha_hora = result.getFeatures().get(i).getProperties().getFECHAHORA();
+				String medio_dete = result.getFeatures().get(i).getProperties().getMEDIODETE();
+				String clase_vehi = result.getFeatures().get(i).getProperties().getCLASEVEHI();
+				String tipo_servi = result.getFeatures().get(i).getProperties().getTIPOSERVI();
+				String infraccion = result.getFeatures().get(i).getProperties().getINFRACCION();
+				String des_infrac = result.getFeatures().get(i).getProperties().getDESINFRAC();
+				String localidad = result.getFeatures().get(i).getProperties().getLOCALIDAD();
+			    double cordenada1 = result.getFeatures().get(i).getGeometry().getCoordinates().get(0);
+			    double cordenada2 = result.getFeatures().get(i).getGeometry().getCoordinates().get(1);
+			    
+			    Comparendo actual = new Comparendo(objective, fecha_hora, medio_dete, clase_vehi, tipo_servi, infraccion, des_infrac, localidad, cordenada1, cordenada2);
+			    datos.agregarNodoFinal(actual);
 			}
+			
 		}
 		catch(FileNotFoundException e)
 		{
@@ -67,9 +81,18 @@ public class Modelo
 		return datos.darTamnaioLista();
 	}
 	
-	public String datosObjeto(int pPosicion)
+	public String darDatosPorObjectid(int pObjectid)
 	{
-		Object objeto = datos.verObjeto(pPosicion);
-		return null;	
+		String mensaje = " ";
+		
+		return mensaje;
+	}
+	
+	public String darDatos(int pPosicion)
+	{
+		String informacion = " ";
+
+		Object info = datos.verObjeto(pPosicion);
+		return informacion;
 	}
 }

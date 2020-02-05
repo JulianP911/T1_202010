@@ -42,10 +42,14 @@ public class Controller
 			{
 			   case "Opcion 1":
 				   int tamanio = modelo.darTamano();
-				   view.printMessage(tamanio + " ");
-		       
+				   view.printMessage(modelo.darDatos(0));           // Imprime la informacion basica del primer comparendo
+				   view.printMessage(modelo.darDatos(tamanio-1));   // Imprime la informacion basica del ultimo comparendo
+				   view.printMessage(tamanio + " ");                // Imprime el tamanio de la lista enlazad
+		        
 			   case "Opcion 2": 
-				   
+				   view.printMessage("Ingrese el Objectid para ver la informacion");
+				   int entrada = lector.nextInt();
+				   view.printMessage(modelo.darDatosPorObjectid(entrada));
 				   
 			   case "Cerrar":
 				   view.printMessage("--------- \n Hasta pronto !! \n---------"); 
