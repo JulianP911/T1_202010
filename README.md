@@ -1,0 +1,6 @@
+# Taller_1_ED
+
+TALLER 1 ESTRUCTURA DE DATOS - LISTA ENLAZADA GENERICA
+
+Integrante:
+- Julian Padilla Molina 201913677
